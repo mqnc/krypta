@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Krypta edit</title>
+<script src="crypto-js.min.js"></script>
+<script src="js.cookie.min.js"></script>
+<script>
+
+function hash(raw){return CryptoJS.SHA512(raw).toString()}
+function encrypt(raw, pw){return CryptoJS.AES.encrypt(raw, pw).toString()}
+function decrypt(cipher, pw, encoding=CryptoJS.enc.Utf8){return CryptoJS.AES.decrypt(cipher, pw).toString(encoding)}
+
+function get(id){return document.getElementById(id)}
+
+function enc(){
+	get("cip").value = encrypt(get("raw").value, hash(get("pw").value))
+}
+function dec(){
+	get("raw").value = decrypt(get("cip").value, hash(get("pw").value))
+}
+
+</script>
+</head>
+
+<body>
+<center>
+<button onclick="enc()"># &larr; A</button><input id="pw"><button onclick="dec()"># &rarr; A</button><br>
+<textarea cols=80 rows=80 id="cip"></textarea>
+<textarea cols=80 rows=80 id="raw"></textarea>
+
+</center>
+</body>
+</html>
