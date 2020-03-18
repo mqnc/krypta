@@ -23,7 +23,7 @@ function init(){
 		pwhash = hash(prompt("Wrong password! Retry:"))
 	}
 
-	Cookies.set("pwhash", pwhash)
+	Cookies.set("pwhash", pwhash, {expires: 91})
 	document.body.innerHTML = decrypt(encryptedBody, pwhash)
 	console.log(document.body.innerHTML)
 }
